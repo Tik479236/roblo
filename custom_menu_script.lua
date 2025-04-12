@@ -1,4 +1,3 @@
-
 --// UI Setup
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
 ScreenGui.Name = "CustomMenuUI"
@@ -85,11 +84,13 @@ createRedButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1
 createRedButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
 createRedButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
 createRedButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
+createRedButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
+createRedButton("Universal", "https://sirius.menu/script")
 
 --// Кнопка для копирования пароля
 local passwordButton = Instance.new("TextButton")
 passwordButton.Size = UDim2.new(0, 360, 0, 40)
-passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- Серый цвет
 passwordButton.TextColor3 = Color3.new(1, 1, 1)
 passwordButton.Font = Enum.Font.GothamBold
 passwordButton.TextScaled = true
