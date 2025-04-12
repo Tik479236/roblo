@@ -69,6 +69,7 @@ local function createRedButton(text, scriptUrl)
 	button.Text = text
 	button.Parent = scroll
 	button.ZIndex = 21
+	button.LayoutOrder = #scroll:GetChildren()
 
 	local corner = Instance.new("UICorner", button)
 	corner.CornerRadius = UDim.new(1, 0)
@@ -76,6 +77,8 @@ local function createRedButton(text, scriptUrl)
 	button.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet(scriptUrl))()
 	end)
+
+	return button
 end
 
 --// Кнопки
@@ -83,20 +86,19 @@ createRedButton("Counter Blox", "https://raw.githubusercontent.com/uedan228/Happ
 createRedButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/BoatBuilderHub")
 createRedButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
 createRedButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
-createRedButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
-createRedButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
-createRedButton("Universal", "https://sirius.menu/script")
+local autoBuildButton = createRedButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
 
---// Кнопка для копирования пароля
+--// Кнопка пароля под Auto Build
 local passwordButton = Instance.new("TextButton")
 passwordButton.Size = UDim2.new(0, 360, 0, 40)
-passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- Серый цвет
+passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
 passwordButton.TextColor3 = Color3.new(1, 1, 1)
 passwordButton.Font = Enum.Font.GothamBold
 passwordButton.TextScaled = true
 passwordButton.Text = "Password: N-314159"
-passwordButton.Parent = scroll
 passwordButton.ZIndex = 21
+passwordButton.Parent = scroll
+passwordButton.LayoutOrder = autoBuildButton.LayoutOrder + 1
 
 local passwordCorner = Instance.new("UICorner", passwordButton)
 passwordCorner.CornerRadius = UDim.new(1, 0)
