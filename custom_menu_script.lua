@@ -69,7 +69,6 @@ local function createRedButton(text, scriptUrl)
 	button.Text = text
 	button.Parent = scroll
 	button.ZIndex = 21
-	button.LayoutOrder = #scroll:GetChildren()
 
 	local corner = Instance.new("UICorner", button)
 	corner.CornerRadius = UDim.new(1, 0)
@@ -86,9 +85,14 @@ createRedButton("Counter Blox", "https://raw.githubusercontent.com/uedan228/Happ
 createRedButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/BoatBuilderHub")
 createRedButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
 createRedButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
+
+-- Новые кнопки: Telekinesis и Universal
+createRedButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
+createRedButton("Universal", "https://sirius.menu/script")
+
+-- Auto Build + пароль
 local autoBuildButton = createRedButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
 
---// Кнопка пароля под Auto Build
 local passwordButton = Instance.new("TextButton")
 passwordButton.Size = UDim2.new(0, 360, 0, 40)
 passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
