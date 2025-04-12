@@ -85,14 +85,13 @@ createRedButton("Counter Blox", "https://raw.githubusercontent.com/uedan228/Happ
 createRedButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/BoatBuilderHub")
 createRedButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
 createRedButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
-
--- Новые кнопки: Telekinesis и Universal
 createRedButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
 createRedButton("Universal", "https://sirius.menu/script")
 
--- Auto Build + пароль
+-- Auto Build
 local autoBuildButton = createRedButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
 
+-- Кнопка пароля — будет ниже Auto Build
 local passwordButton = Instance.new("TextButton")
 passwordButton.Size = UDim2.new(0, 360, 0, 40)
 passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
@@ -100,9 +99,8 @@ passwordButton.TextColor3 = Color3.new(1, 1, 1)
 passwordButton.Font = Enum.Font.GothamBold
 passwordButton.TextScaled = true
 passwordButton.Text = "Password: N-314159"
-passwordButton.ZIndex = 21
 passwordButton.Parent = scroll
-passwordButton.LayoutOrder = autoBuildButton.LayoutOrder + 1
+passwordButton.ZIndex = 21
 
 local passwordCorner = Instance.new("UICorner", passwordButton)
 passwordCorner.CornerRadius = UDim.new(1, 0)
@@ -118,15 +116,4 @@ end)
 local menuOpen = false
 
 imageButton.MouseButton1Click:Connect(function()
-	if not menuOpen then
-		menuOpen = true
-		menuFrame.Visible = true
-		imageButton.Visible = false
-	end
-end)
-
-closeButton.MouseButton1Click:Connect(function()
-	menuOpen = false
-	menuFrame.Visible = false
-	imageButton.Visible = true
-end)
+	if
