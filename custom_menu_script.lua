@@ -109,7 +109,7 @@ end)
 --// Дополнительные кнопки
 createRedButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
 createRedButton("Universal", "https://sirius.menu/script")
-createRedButton("Invisible", "https://pastebin.com/raw/3Rnd9rHf")
+createRedButton("Transparency", "https://pastebin.com/raw/3Rnd9rHf")
 
 --// Открытие/закрытие
 local menuOpen = false
