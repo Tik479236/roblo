@@ -85,7 +85,7 @@ createRedButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAs
 createRedButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
 createRedButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
 
---// Кнопка для копирования пароля (всегда после Auto Build)
+--// Кнопка пароля (всегда после Auto Build)
 local passwordButton = Instance.new("TextButton")
 passwordButton.Size = UDim2.new(0, 360, 0, 40)
 passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
@@ -106,9 +106,10 @@ passwordButton.MouseButton1Click:Connect(function()
 	passwordButton.Text = "Password: N-314159"
 end)
 
--- Новые кнопки
+--// Дополнительные кнопки
 createRedButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
 createRedButton("Universal", "https://sirius.menu/script")
+createRedButton("Transparency", "https://pastebin.com/raw/3Rnd9rHf")
 
 --// Открытие/закрытие
 local menuOpen = false
