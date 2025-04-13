@@ -112,13 +112,22 @@ local function createButton(text, url)
 	end)
 end
 
--- Кнопки
+-- Сначала обычные кнопки
 createButton("Counter Blox", "https://raw.githubusercontent.com/uedan228/Happy-Hub/main/Counter%20Blox%3A%20Source%202")
 createButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/BoatBuilderHub")
 createButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
 createButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
+createButton("Universal", "https://sirius.menu/script")
+createButton("Invisible", "https://pastebin.com/raw/3Rnd9rHf")
+createButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
+
+-- Затем Turret
+createButton("Turret Radar", "https://pastebin.com/raw/GXNZKMYD")
+
+-- Затем Auto Build
 createButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
 
+-- Последняя кнопка — пароль
 local password = Instance.new("TextButton", scroll)
 password.Size = UDim2.new(0, 360, 0, 40)
 password.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
@@ -128,6 +137,7 @@ password.TextScaled = true
 password.Text = "Password: N-314159"
 password.ZIndex = 21
 Instance.new("UICorner", password).CornerRadius = UDim.new(1, 0)
+password.Parent = scroll
 
 password.MouseButton1Click:Connect(function()
 	setclipboard("N-314159")
@@ -135,10 +145,6 @@ password.MouseButton1Click:Connect(function()
 	task.wait(1)
 	password.Text = "Password: N-314159"
 end)
-
-createButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
-createButton("Universal", "https://sirius.menu/script")
-createButton("Invisible", "https://pastebin.com/raw/3Rnd9rHf")
 
 --// Анимация открытия
 openBtn.MouseButton1Click:Connect(function()
