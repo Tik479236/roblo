@@ -1,49 +1,74 @@
---// UI Setup
-local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
-ScreenGui.Name = "CustomMenuUI"
-ScreenGui.ResetOnSpawn = false
+--// Настройки
+local TweenService = game:GetService("TweenService")
+local Lighting = game:GetService("Lighting")
+local CoreGui = game:GetService("CoreGui")
 
---// Картинка-кнопка
-local imageButton = Instance.new("ImageButton", ScreenGui)
-imageButton.Size = UDim2.new(0, 60, 0, 60)
-imageButton.Position = UDim2.new(0, 20, 0, 200)
-imageButton.Image = "rbxthumb://type=Asset&id=91349943208870&w=420&h=420"
-imageButton.BackgroundTransparency = 1
-imageButton.Name = "OpenImage"
-imageButton.ZIndex = 10
+--// UI
+local gui = Instance.new("ScreenGui", CoreGui)
+gui.Name = "CustomMenuUI"
+gui.ResetOnSpawn = false
 
-local imageUICorner = Instance.new("UICorner", imageButton)
-imageUICorner.CornerRadius = UDim.new(1, 0)
+--// Размытие на весь экран
+local blur = Instance.new("BlurEffect")
+blur.Enabled = false
+blur.Size = 0
+blur.Parent = Lighting
+
+local function toggleBlur(enable)
+	if enable then
+		blur.Enabled = true
+		TweenService:Create(blur, TweenInfo.new(0.3), { Size = 20 }):Play()
+	else
+		local blurOut = TweenService:Create(blur, TweenInfo.new(0.25), { Size = 0 })
+		blurOut:Play()
+		blurOut.Completed:Connect(function()
+			blur.Enabled = false
+		end)
+	end
+end
+
+--// Кнопка открытия
+local openBtn = Instance.new("ImageButton", gui)
+openBtn.Size = UDim2.new(0, 60, 0, 60)
+openBtn.Position = UDim2.new(0, 20, 0, 160)
+openBtn.Image = "rbxthumb://type=Asset&id=132917237197645&w=420&h=420"
+openBtn.BackgroundTransparency = 1
+openBtn.Name = "OpenImage"
+openBtn.ZIndex = 10
+Instance.new("UICorner", openBtn).CornerRadius = UDim.new(1, 0)
 
 --// Главное меню
-local menuFrame = Instance.new("Frame", ScreenGui)
-menuFrame.Size = UDim2.new(0, 400, 0, 300)
-menuFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
-menuFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-menuFrame.Visible = false
-menuFrame.Active = true
-menuFrame.Draggable = true
-menuFrame.ZIndex = 20
+local menu = Instance.new("Frame", gui)
+menu.Size = UDim2.new(0, 400, 0, 300)
+menu.Position = UDim2.new(0.5, -200, 0.5, -150)
+menu.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+menu.Visible = false
+menu.Active = true
+menu.Draggable = true
+menu.ZIndex = 20
+Instance.new("UICorner", menu).CornerRadius = UDim.new(0.05, 0)
 
-local menuUICorner = Instance.new("UICorner", menuFrame)
-menuUICorner.CornerRadius = UDim.new(0.05, 0)
+-- Чёрная рамка
+local border = Instance.new("UIStroke", menu)
+border.Thickness = 2
+border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+border.LineJoinMode = Enum.LineJoinMode.Round
+border.Color = Color3.fromRGB(0, 0, 0)
 
---// Кнопка-крестик
-local closeButton = Instance.new("TextButton", menuFrame)
-closeButton.Size = UDim2.new(0, 30, 0, 30)
-closeButton.Position = UDim2.new(1, -35, 0, 5)
-closeButton.Text = "X"
-closeButton.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
-closeButton.TextColor3 = Color3.new(1, 1, 1)
-closeButton.Font = Enum.Font.GothamBold
-closeButton.TextScaled = true
-closeButton.ZIndex = 21
+--// Кнопка "X"
+local closeBtn = Instance.new("TextButton", menu)
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -35, 0, 5)
+closeBtn.Text = "X"
+closeBtn.BackgroundColor3 = Color3.fromRGB(180, 60, 60)
+closeBtn.TextColor3 = Color3.new(1, 1, 1)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextScaled = true
+closeBtn.ZIndex = 21
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(1, 0)
 
-local closeCorner = Instance.new("UICorner", closeButton)
-closeCorner.CornerRadius = UDim.new(1, 0)
-
---// Контейнер с прокруткой
-local scroll = Instance.new("ScrollingFrame", menuFrame)
+--// Scroll
+local scroll = Instance.new("ScrollingFrame", menu)
 scroll.Size = UDim2.new(1, -20, 1, -50)
 scroll.Position = UDim2.new(0, 10, 0, 40)
 scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
@@ -53,77 +78,91 @@ scroll.ZIndex = 20
 scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
 scroll.ClipsDescendants = true
 
-local UIListLayout = Instance.new("UIListLayout", scroll)
-UIListLayout.Padding = UDim.new(0, 10)
-UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+local layout = Instance.new("UIListLayout", scroll)
+layout.Padding = UDim.new(0, 10)
+layout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+layout.SortOrder = Enum.SortOrder.LayoutOrder
 
---// Функция создания кнопок
-local function createRedButton(text, scriptUrl)
-	local button = Instance.new("TextButton")
-	button.Size = UDim2.new(0, 360, 0, 50)
-	button.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
-	button.TextColor3 = Color3.new(1, 1, 1)
-	button.Font = Enum.Font.GothamBold
-	button.TextScaled = true
-	button.Text = text
-	button.Parent = scroll
-	button.ZIndex = 21
+--// Создание кнопок
+local function createButton(text, url)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(0, 360, 0, 50)
+	btn.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.Font = Enum.Font.GothamBold
+	btn.TextScaled = true
+	btn.Text = text
+	btn.Parent = scroll
+	btn.ZIndex = 21
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(1, 0)
 
-	local corner = Instance.new("UICorner", button)
-	corner.CornerRadius = UDim.new(1, 0)
+	btn.MouseEnter:Connect(function()
+		TweenService:Create(btn, TweenInfo.new(0.2), {
+			BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+		}):Play()
+	end)
+	btn.MouseLeave:Connect(function()
+		TweenService:Create(btn, TweenInfo.new(0.2), {
+			BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+		}):Play()
+	end)
 
-	button.MouseButton1Click:Connect(function()
-		loadstring(game:HttpGet(scriptUrl))()
+	btn.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet(url))()
 	end)
 end
 
---// Кнопки
-createRedButton("Counter Blox", "https://raw.githubusercontent.com/uedan228/Happy-Hub/main/Counter%20Blox%3A%20Source%202")
-createRedButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/BoatBuilderHub")
-createRedButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
-createRedButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
-createRedButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
+-- Кнопки
+createButton("Counter Blox", "https://raw.githubusercontent.com/uedan228/Happy-Hub/main/Counter%20Blox%3A%20Source%202")
+createButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/BoatBuilderHub")
+createButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
+createButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
+createButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
 
---// Кнопка пароля (всегда после Auto Build)
-local passwordButton = Instance.new("TextButton")
-passwordButton.Size = UDim2.new(0, 360, 0, 40)
-passwordButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-passwordButton.TextColor3 = Color3.new(1, 1, 1)
-passwordButton.Font = Enum.Font.GothamBold
-passwordButton.TextScaled = true
-passwordButton.Text = "Password: N-314159"
-passwordButton.Parent = scroll
-passwordButton.ZIndex = 21
+local password = Instance.new("TextButton", scroll)
+password.Size = UDim2.new(0, 360, 0, 40)
+password.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+password.TextColor3 = Color3.new(1, 1, 1)
+password.Font = Enum.Font.GothamBold
+password.TextScaled = true
+password.Text = "Password: N-314159"
+password.ZIndex = 21
+Instance.new("UICorner", password).CornerRadius = UDim.new(1, 0)
 
-local passwordCorner = Instance.new("UICorner", passwordButton)
-passwordCorner.CornerRadius = UDim.new(1, 0)
-
-passwordButton.MouseButton1Click:Connect(function()
+password.MouseButton1Click:Connect(function()
 	setclipboard("N-314159")
-	passwordButton.Text = "Copied!"
+	password.Text = "Copied!"
 	task.wait(1)
-	passwordButton.Text = "Password: N-314159"
+	password.Text = "Password: N-314159"
 end)
 
---// Дополнительные кнопки
-createRedButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
-createRedButton("Universal", "https://sirius.menu/script")
-createRedButton("Invisible", "https://pastebin.com/raw/3Rnd9rHf")
+createButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
+createButton("Universal", "https://sirius.menu/script")
+createButton("Invisible", "https://pastebin.com/raw/3Rnd9rHf")
 
---// Открытие/закрытие
-local menuOpen = false
+--// Анимация открытия
+openBtn.MouseButton1Click:Connect(function()
+	menu.Position = UDim2.new(0, openBtn.AbsolutePosition.X, 0, openBtn.AbsolutePosition.Y)
+	menu.Size = UDim2.new(0, 0, 0, 0)
+	menu.Visible = true
+	openBtn.Visible = false
+	toggleBlur(true)
 
-imageButton.MouseButton1Click:Connect(function()
-	if not menuOpen then
-		menuOpen = true
-		menuFrame.Visible = true
-		imageButton.Visible = false
-	end
+	TweenService:Create(menu, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+		Size = UDim2.new(0, 400, 0, 300),
+		Position = UDim2.new(0.5, -200, 0.5, -150)
+	}):Play()
 end)
 
-closeButton.MouseButton1Click:Connect(function()
-	menuOpen = false
-	menuFrame.Visible = false
-	imageButton.Visible = true
+--// Анимация закрытия
+closeBtn.MouseButton1Click:Connect(function()
+	local tweenOut = TweenService:Create(menu, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+		Size = UDim2.new(0, 0, 0, 0),
+		Position = UDim2.new(0, openBtn.AbsolutePosition.X, 0, openBtn.AbsolutePosition.Y)
+	})
+	tweenOut:Play()
+	tweenOut.Completed:Wait()
+	menu.Visible = false
+	openBtn.Visible = true
+	toggleBlur(false)
 end)
