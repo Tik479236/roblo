@@ -112,22 +112,21 @@ local function createButton(text, url)
 	end)
 end
 
--- Сначала обычные кнопки
+-- Добавляем кнопки
 createButton("Counter Blox", "https://raw.githubusercontent.com/uedan228/Happy-Hub/main/Counter%20Blox%3A%20Source%202")
 createButton("Purple Auto Build", "https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/BoatBuilderHub")
 createButton("Script with Cats", "https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua")
 createButton("Ragdoll", "https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
 createButton("Universal", "https://sirius.menu/script")
 createButton("Invisible", "https://pastebin.com/raw/3Rnd9rHf")
-createButton("Telekinesis", "https://raw.githubusercontent.com/thenormalchel/RbxScripts/refs/heads/main/MityHubByMe.lua")
 
--- Затем Turret
-createButton("Turret Radar", "https://pastebin.com/raw/GXNZKMYD")
+-- Третья с конца — Турель
+createButton("Turret", "https://raw.githubusercontent.com/Tik479236/test/refs/heads/main/TurretRadarScript.lua")
 
--- Затем Auto Build
+-- Вторая с конца — Auto Build
 createButton("Auto Build", "https://raw.githubusercontent.com/novakoolhub/Scripts/main/Scripts/NovBoatR1")
 
--- Последняя кнопка — пароль
+-- Последняя — Пароль
 local password = Instance.new("TextButton", scroll)
 password.Size = UDim2.new(0, 360, 0, 40)
 password.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
@@ -137,7 +136,6 @@ password.TextScaled = true
 password.Text = "Password: N-314159"
 password.ZIndex = 21
 Instance.new("UICorner", password).CornerRadius = UDim.new(1, 0)
-password.Parent = scroll
 
 password.MouseButton1Click:Connect(function()
 	setclipboard("N-314159")
@@ -146,7 +144,7 @@ password.MouseButton1Click:Connect(function()
 	password.Text = "Password: N-314159"
 end)
 
---// Анимация открытия
+-- Анимация открытия
 openBtn.MouseButton1Click:Connect(function()
 	menu.Position = UDim2.new(0, openBtn.AbsolutePosition.X, 0, openBtn.AbsolutePosition.Y)
 	menu.Size = UDim2.new(0, 0, 0, 0)
@@ -160,7 +158,7 @@ openBtn.MouseButton1Click:Connect(function()
 	}):Play()
 end)
 
---// Анимация закрытия
+-- Анимация закрытия
 closeBtn.MouseButton1Click:Connect(function()
 	local tweenOut = TweenService:Create(menu, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
 		Size = UDim2.new(0, 0, 0, 0),
